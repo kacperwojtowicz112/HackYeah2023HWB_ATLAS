@@ -28,22 +28,27 @@ app.layout=html.Div([
 ),
 html.H5('Answer questions below'),
 
-            html.Label("How many times have you been pregnant?"),
+            html.Label("How many times have your patient been pregnant?"),
             html.Br(),
             dcc.Input(id="pregnant", value = "", max=20),
             html.Br(),
 
-            html.Label("What is your blood pressure?"),
+            html.Label("What is your patient's glucose score?"),
+            html.Br(),
+            dcc.Input(id="glucose", value = "", max=300),
+            html.Br(),
+
+            html.Label("What is your patient's blood pressure?"),
             html.Br(),
             dcc.Input(id="pressure", value = "", max=300),
             html.Br(),
 
-            html.Label("What is your Body Mass Index (BMI)?"),
+            html.Label("What is your patient's Body Mass Index (BMI)?"),
             html.Br(),
             dcc.Input(id="bmi", value = "", max=50),
             html.Br(),
 
-            html.Label("How old are you?"),
+            html.Label("How old is your patient?"),
             html.Br(),
             dcc.Input(id="age", value = "", max=130),
             html.Br(),
@@ -66,16 +71,18 @@ html.H5('Answer questions below'),
         Output(component_id = "container-button-basic", component_property = "children"),
         Input('submit-val', 'n_clicks'),
         State(component_id = "pregnant", component_property = "value"),
+        State(component_id = "glucose", component_property = "value"),
         State(component_id = "pressure", component_property = "value"),
         State(component_id = "bmi", component_property = "value"),
         State(component_id = "age", component_property = "value"),
 
 )
-def pred_client(n_clicks, pregnant, pressure, bmi, age):
+def pred_client(n_clicks, pregnant, glucose, pressure, bmi, age):
     if n_clicks >0:
         try:
             data1 = {
                     "Pregnancies": pregnant,
+                    "Glucose": glucose,
                     "BloodPressure": pressure,
                     "BMI": bmi,
                     "Age": age}
