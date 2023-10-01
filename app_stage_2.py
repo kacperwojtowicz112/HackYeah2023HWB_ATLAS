@@ -91,14 +91,14 @@ def pred_client(n_clicks, pregnant, glucose, pressure, bmi, age):
             probability = int(probability * 100)
             binary = rf_mod.predict(df_test)
             if binary==1:
-                binary = "You might suffer from diabetes"
+                binary = "Your patient might suffer from diabetes"
             else:
-                binary = "You probably don't suffer from diabetes"
+                binary = "Your patient probably doesn't suffer from diabetes"
             if probability > 99:
                 probability = 99
             elif probability < 1:
                 probability = 1
-            return f'{binary}. Chance of you suffering from diabetes is {probability}%.'
+            return f'{binary}. Chance of them suffering from diabetes is {probability}%.'
         except ValueError:
             return 'Something went wrong. Make sure you filled the form correctly.'
 
